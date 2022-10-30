@@ -1,0 +1,4 @@
+
+> plugin-segment@0.0.0 postinstall
+> flex-plugin pre-script-check
+
