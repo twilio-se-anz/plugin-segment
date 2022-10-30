@@ -1,0 +1,29 @@
+{
+  "name": "segment",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "tsc --noEmit",
+    "start": "twilio-run --functions-folder dist/functions --assets-folder dist/assets --live",
+    "deploy": "twilio-run deploy --functions-folder dist/functions --assets-folder dist/assets",
+    "build": "tsc && npm run build:copy-assets",
+    "build:watch": "tsc --watch",
+    "build:copy-assets": "copyfiles src/assets/* src/assets/**/* --up 2 --exclude **/*.ts dist/assets/",
+    "predeploy": "npm run build"
+  },
+  "dependencies": {
+    "@twilio-labs/serverless-runtime-types": "^1.1",
+    "@twilio/runtime-handler": "1.2.5",
+    "node-fetch": "^2.6.6",
+    "twilio": "^3.56"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.2",
+    "copyfiles": "^2.2.0",
+    "twilio-run": "^3.4.5",
+    "typescript": "^4"
+  },
+  "engines": {
+    "node": "14"
+  }
+}
