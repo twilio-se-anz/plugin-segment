@@ -2,7 +2,7 @@ const getTraitsForUser = async (userId: string) => {
   try {
     const url = `http://localhost:3000/segment/get-traits?userId=${userId}`;
     const config = {
-      method: 'get',
+      method: "get",
       headers: {},
     };
 
@@ -23,4 +23,29 @@ const getTraitsForUser = async (userId: string) => {
   }
 };
 
-export { getTraitsForUser };
+const getEventsForUser = async (userId: string) => {
+  try {
+    const url = `http://localhost:3000/segment/get-events?userId=${userId}`;
+    const config = {
+      method: "get",
+      headers: {},
+    };
+
+    const response = await fetch(url, config);
+
+    if (!response.ok) {
+      throw new Error(
+        `Error getting events: ${response.status} - ${response.statusText}`
+      );
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export { getTraitsForUser, getEventsForUser };

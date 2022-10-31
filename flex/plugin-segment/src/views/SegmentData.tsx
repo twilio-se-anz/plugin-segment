@@ -10,6 +10,8 @@ import {
   Stack,
 } from "@twilio-paste/core";
 import CustomerInfo from "../components/CustomerInfo";
+import EventTimeline from "../components/EventTimeline";
+import FauxSuggestions from "../components/FauxSuggestions";
 // import FauxHistory from "../Common/FauxHistory";
 // import FauxSuggestions from "../Common/FauxSuggestions";
 
@@ -35,16 +37,35 @@ const FauxService = () => {
           </Stack>
         </Column>
 
-        <Column span={8}>
+        <Column span={4}>
+          <Card padding="space70">
+            <Stack orientation={"vertical"} spacing="space50">
+              {/* <Heading as={"h2"} variant={"heading40"}>
+                Customer Context
+              </Heading> */}
+              {/* <FauxHistory /> */}
+              <Heading as={"h2"} variant={"heading40"}>
+                Proactive Knowledge
+              </Heading>
+              <FauxSuggestions />
+            </Stack>
+          </Card>
+        </Column>
+
+        <Column span={4}>
           <Card padding="space70">
             <Stack orientation={"vertical"} spacing="space50">
               <Heading as={"h2"} variant={"heading40"}>
                 Customer Context
               </Heading>
+              <EventTimeline />
+              {/* <Heading as={"h2"} variant={"heading40"}>
+                Customer Context
+              </Heading> */}
               {/* <FauxHistory /> */}
-              <Heading as={"h2"} variant={"heading40"}>
+              {/* <Heading as={"h2"} variant={"heading40"}>
                 Proactive Knowledge
-              </Heading>
+              </Heading> */}
               {/* <FauxSuggestions /> */}
             </Stack>
           </Card>
