@@ -1,10 +1,8 @@
 import React from "react";
 import * as Flex from "@twilio/flex-ui";
 import { FlexPlugin } from "@twilio/flex-plugin";
-import { Tab } from "@twilio/flex-ui";
-import TraitsChips from "./components/TraitsChips";
-import SegmentData from "./views/SegmentData";
 import { CustomizationProvider } from "@twilio-paste/core/customization";
+import Panel from "./components/Panel";
 
 const PLUGIN_NAME = "SegmentPlugin";
 
@@ -31,15 +29,8 @@ export default class SegmentPlugin extends FlexPlugin {
       minimumFirstPanelSize: "400px",
     };
 
-    flex.AgentDesktopView.Panel2.Content.replace(
-      <SegmentData key="segment-data" />,
-      { sortOrder: -1 }
-    );
+    const rightPanel = <Panel key="panel-replacement" />;
 
-    flex.TaskCanvasTabs.Content.add(
-      <Tab label="Traits" uniqueName="incident-all" key="incident-all">
-        <TraitsChips key="incident-all" />
-      </Tab>
-    );
+    flex.AgentDesktopView.Panel2.Content.replace(rightPanel, { sortOrder: -1 });
   }
 }

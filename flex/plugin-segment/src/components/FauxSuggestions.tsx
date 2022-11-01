@@ -27,7 +27,11 @@ const FauxSuggestions = () => {
             <Text as="span" display={"flex"}>
               <InformationIcon decorative={true} about="Channel" />
               <Box marginLeft="space40">
-                <Anchor href="https://www.twilio.com/pay" showExternal>
+                <Anchor
+                  href="https://www.twilio.com/pay"
+                  target="_blank"
+                  showExternal
+                >
                   Setting up direct debits
                 </Anchor>
               </Box>
@@ -40,8 +44,12 @@ const FauxSuggestions = () => {
             <Text as="span" display={"flex"}>
               <InformationIcon decorative={true} about="Channel" />
               <Box marginLeft="space40">
-                <Anchor href="https://www.twilio.com/pay" showExternal>
-                  Making secure payments over the phone
+                <Anchor
+                  href="https://www.twilio.com/pay"
+                  target="_blank"
+                  showExternal
+                >
+                  Making secure online payments
                 </Anchor>
               </Box>
             </Text>
@@ -56,6 +64,7 @@ const FauxSuggestions = () => {
                 <Anchor
                   href="https://www.twilio.com/use-cases/commerce-communications/account-notifications"
                   showExternal
+                  target="_blank"
                 >
                   Configuring Account Notifications
                 </Anchor>
@@ -69,7 +78,11 @@ const FauxSuggestions = () => {
             <Text as="span" display={"flex"}>
               <InformationIcon decorative={true} about="Channel" />
               <Box marginLeft="space40">
-                <Anchor href="https://twilio.com/signal" showExternal>
+                <Anchor
+                  href="https://twilio.com/signal"
+                  target="_blank"
+                  showExternal
+                >
                   Discounts for conference attendees
                 </Anchor>
               </Box>

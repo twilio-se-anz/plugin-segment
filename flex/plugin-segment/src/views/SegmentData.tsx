@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Box,
-  Button,
   Card,
   Column,
   Grid,
@@ -12,6 +11,8 @@ import {
 import CustomerInfo from "../components/CustomerInfo";
 import EventTimeline from "../components/EventTimeline";
 import FauxSuggestions from "../components/FauxSuggestions";
+import EngagementMetrics from "../components/EngagementMetrics";
+import TraitTags from "../components/TraitTags";
 // import FauxHistory from "../Common/FauxHistory";
 // import FauxSuggestions from "../Common/FauxSuggestions";
 
@@ -38,37 +39,39 @@ const FauxService = () => {
         </Column>
 
         <Column span={4}>
-          <Card padding="space70">
-            <Stack orientation={"vertical"} spacing="space50">
-              {/* <Heading as={"h2"} variant={"heading40"}>
-                Customer Context
-              </Heading> */}
-              {/* <FauxHistory /> */}
+          <Stack orientation={"vertical"} spacing="space50">
+            <Card padding="space70">
+              <Heading as={"h2"} variant={"heading40"}>
+                CDP Engagement Metrics
+              </Heading>
+              <EngagementMetrics />
+            </Card>
+
+            <Card padding="space70">
+              <Heading as={"h2"} variant={"heading40"}>
+                CDP Traits
+              </Heading>
+              <TraitTags />
+            </Card>
+
+            <Card padding="space70">
               <Heading as={"h2"} variant={"heading40"}>
                 Proactive Knowledge
               </Heading>
               <FauxSuggestions />
-            </Stack>
-          </Card>
+            </Card>
+          </Stack>
         </Column>
 
         <Column span={4}>
-          <Card padding="space70">
-            <Stack orientation={"vertical"} spacing="space50">
+          <Stack orientation={"vertical"} spacing="space50">
+            <Card padding="space70">
               <Heading as={"h2"} variant={"heading40"}>
-                Customer Context
+                CDP Event Timeline
               </Heading>
               <EventTimeline />
-              {/* <Heading as={"h2"} variant={"heading40"}>
-                Customer Context
-              </Heading> */}
-              {/* <FauxHistory /> */}
-              {/* <Heading as={"h2"} variant={"heading40"}>
-                Proactive Knowledge
-              </Heading> */}
-              {/* <FauxSuggestions /> */}
-            </Stack>
-          </Card>
+            </Card>
+          </Stack>
         </Column>
       </Grid>
     </Box>

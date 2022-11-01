@@ -9,7 +9,6 @@ import {
   THead,
   Tr,
   Card,
-  Heading,
   Avatar,
   MediaBody,
   MediaFigure,
@@ -17,6 +16,7 @@ import {
   Stack,
   Separator,
   Badge,
+  SkeletonLoader,
 } from "@twilio-paste/core";
 
 import { ThumbsUpIcon } from "@twilio-paste/icons/esm/ThumbsUpIcon";
@@ -24,55 +24,66 @@ import { BusinessIcon } from "@twilio-paste/icons/esm/BusinessIcon";
 import { CommunityIcon } from "@twilio-paste/icons/esm/CommunityIcon";
 import { StarIcon } from "@twilio-paste/icons/esm/StarIcon";
 
-import Typography from "@material-ui/core/Typography";
-import Rating from "@material-ui/lab/Rating";
-import LoyaltyIcon from "@material-ui/icons/Loyalty";
-import ImportantDevicesIcon from "@material-ui/icons/ImportantDevices";
-
 import { getTraitsForUser } from "../services/segmentService";
 import { SegmentTraits } from "../types/SegmentTraits";
+import { withTaskContext } from "@twilio/flex-ui";
 
-const CustomerInfo = () => {
+type Props = {
+  task?: any;
+};
+
+const CustomerInfo = (props: Props) => {
   const [traits, setTraits] = useState({} as SegmentTraits);
-  const [digitalEngagmentRating, setDigitalEngagmentRating] = useState(0);
-  const [marketingEngagmentRating, setMarketingEngagmentRating] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getTraits() {
-      const traitsObj = await getTraitsForUser("00Q4Y0000023WEcUAM");
-      setTraits(traitsObj);
-      setDigitalEngagmentRating(
-        (traitsObj.digital_engagement_score as number) * 5
-      );
-      setMarketingEngagmentRating(
-        (traitsObj.marketing_engagement_score as number) * 5
-      );
+      if (props.task?.attributes?.email) {
+        const traitsObj = await getTraitsForUser(props.task.attributes.email);
+        setTraits(traitsObj);
+      }
+      setLoading(false);
     }
     getTraits();
   }, []);
 
+  if (loading)
+    return (
+      <Card>
+        <Stack orientation={"vertical"} spacing={"space70"}>
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+          <SkeletonLoader />
+        </Stack>
+      </Card>
+    );
+
   return (
     <Card>
       <Stack orientation={"vertical"} spacing={"space40"}>
-        <MediaObject as="div" verticalAlign="center">
-          <MediaFigure as="div" spacing="space40">
-            <Avatar
-              size="sizeIcon90"
-              name="Alex Smith"
-              src="https://i.pravatar.cc/300"
-            />
-          </MediaFigure>
-          <MediaBody as="div">
-            <Text
-              as="h2"
-              variant="heading50"
-              fontSize={"fontSize60"}
-              fontWeight="fontWeightBold"
-            >
-              {traits.first_name} {traits.last_name}
-            </Text>
-          </MediaBody>
-        </MediaObject>
+        {traits && traits.first_name && traits.last_name && (
+          <MediaObject as="div" verticalAlign="center">
+            <MediaFigure as="div" spacing="space40">
+              <Avatar
+                size="sizeIcon90"
+                name={traits.first_name + " " + traits.last_name}
+              />
+            </MediaFigure>
+            <MediaBody as="div">
+              <Text
+                as="h2"
+                variant="heading50"
+                fontSize={"fontSize60"}
+                fontWeight="fontWeightBold"
+              >
+                {traits.first_name} {traits.last_name}
+              </Text>
+            </MediaBody>
+          </MediaObject>
+        )}
 
         <Table>
           <THead>
@@ -118,7 +129,7 @@ const CustomerInfo = () => {
             </Tr>
           </TBody>
         </Table>
-
+        {/* 
         <Separator orientation="horizontal" verticalSpacing="space50" />
         <Box
           display="flex"
@@ -144,31 +155,10 @@ const CustomerInfo = () => {
           <Badge as="span" variant="new">
             Customer H1 Promo
           </Badge>
-        </Box>
-        <Separator orientation="horizontal" verticalSpacing="space50" />
-        <Box>
-          <Typography component="legend">Digital Engagment</Typography>
-          <Rating
-            name="read-only"
-            value={digitalEngagmentRating}
-            precision={0.1}
-            icon={<ImportantDevicesIcon fontSize="inherit" />}
-            readOnly
-          />
-        </Box>
-        <Box>
-          <Typography component="legend">Marketing Engagment</Typography>
-          <Rating
-            name="read-only"
-            value={marketingEngagmentRating}
-            precision={0.1}
-            icon={<LoyaltyIcon fontSize="inherit" />}
-            readOnly
-          />
-        </Box>
+        </Box> */}
       </Stack>
     </Card>
   );
 };
 
-export default CustomerInfo;
+export default withTaskContext(CustomerInfo);
