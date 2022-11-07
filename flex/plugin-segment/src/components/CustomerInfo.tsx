@@ -129,33 +129,6 @@ const CustomerInfo = (props: Props) => {
             </Tr>
           </TBody>
         </Table>
-        {/* 
-        <Separator orientation="horizontal" verticalSpacing="space50" />
-        <Box
-          display="flex"
-          columnGap="space40"
-          rowGap="space60"
-          flexWrap="wrap"
-        >
-          <Badge as="span" variant="error">
-            Recent password reset
-          </Badge>
-          <Badge as="span" variant="success">
-            10+ On-time payments
-          </Badge>
-          <Badge as="span" variant="success">
-            Lifetime 12+ months
-          </Badge>
-          <Badge as="span" variant="success">
-            Referred a friend
-          </Badge>
-          <Badge as="span" variant="new">
-            Customer H2 Promo
-          </Badge>
-          <Badge as="span" variant="new">
-            Customer H1 Promo
-          </Badge>
-        </Box> */}
       </Stack>
     </Card>
   );

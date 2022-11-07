@@ -48,7 +48,6 @@ export const handler: ServerlessFunctionSignature = async function (
 
     const email = encodeURIComponent(event.userId || "");
     const url = `${context.SEGMENT_BASE_URL}/spaces/${context.SEGMENT_SPACEID}/collections/users/profiles/email:${email}/traits?limit=200`;
-    // const url = `${context.SEGMENT_BASE_URL}/spaces/${context.SEGMENT_SPACEID}/collections/users/profiles/user_id:${event.userId}/traits?limit=200`;
 
     console.log(`Fetching segment Trait Data from: ${url}`);
 

@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Stack,
-  Badge,
-  SkeletonLoader,
-  BadgeProps,
-} from "@twilio-paste/core";
+import { Box, Stack, Badge, SkeletonLoader } from "@twilio-paste/core";
 
 import { getTraitsForUser } from "../services/segmentService";
 import { SegmentTraits } from "../types/SegmentTraits";
 import { withTaskContext } from "@twilio/flex-ui";
 import { BadgeVariants } from "@twilio-paste/badge/dist/types";
-import { KnownTrait, KnownTraits } from "../constants/segmentTraits";
+import { KnownTraits } from "../constants/segmentTraits";
 
 type Props = {
   task?: any;
@@ -78,25 +72,6 @@ const TraitTags = (props: Props) => {
           {badge.value}
         </Badge>
       ))}
-
-      {/* <Badge as="span" variant="error">
-        Recent password reset
-      </Badge>
-      <Badge as="span" variant="success">
-        10+ On-time payments
-      </Badge>
-      <Badge as="span" variant="success">
-        Lifetime 12+ months
-      </Badge>
-      <Badge as="span" variant="success">
-        Referred a friend
-      </Badge>
-      <Badge as="span" variant="new">
-        Customer H2 Promo
-      </Badge>
-      <Badge as="span" variant="new">
-        Customer H1 Promo
-      </Badge> */}
     </Box>
   );
 };

@@ -51,9 +51,6 @@ export const handler: ServerlessFunctionSignature = async function (
 
     console.log(`Fetching segment Event Data from: ${url}`);
 
-    // const url = `${context.SEGMENT_BASE_URL}/spaces/${context.SEGMENT_SPACEID}/collections/users/profiles/email:alina.timofeeva%2B56%40macquarie.com/events?limit=100`;
-    //https://profiles.segment.com/v1/spaces/spa_d8SrDMWqWqpeEVXuLsVYn8/collections/users/profiles/email:alina.timofeeva%2B56%40macquarie.com/events
-
     var options: any = {
       method: "GET",
       headers: {
