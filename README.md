@@ -6,6 +6,7 @@ Events are pulled from the Segment Profile API via a Serverless function and dis
 
 **_Features:_**
 
+- 🌟 Engagement metrics (Digital, Marketing) based on 0.0 to 1.0 value
 - 🌟 Customer event timeline
 - 🌟 Display of event name or page title
 - 🌟 Hyperlinks for page views
