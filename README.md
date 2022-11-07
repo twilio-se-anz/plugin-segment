@@ -16,6 +16,39 @@ Events are pulled from the Segment Profile API via a Serverless function and dis
 
 ![display](./docs/flex-segment.png)
 
+## Configuring Flex to show Traits
+
+The "CDP Traits" section iterates through the known traits from `src/constants/segmentTraits.ts` and depending on the configuration will:
+- Display the trait name
+- Display the trait name and value
+- Display only if the value is `true`
+- Colour the trait (using Paste badge variants)
+
+Examples:
+
+```ts
+ {
+    key: "account_type",
+    label: "Account Type",
+    display_value: true,
+    variant: "info",
+  },
+  {
+    key: "pageUserIsOn",
+    label: "User is on page",
+    display_value: true,
+    variant: "success",
+  },
+  {
+    key: "ownr_ocpd_hm_lon_cstmr_ind",
+    label: "Owner Occupied Home Loan",
+    display_value: false,
+    variant: "error",
+    onlyIfTrue: true,
+  },
+  ```
+
+
 ## Deployment
 
 ### Segment
