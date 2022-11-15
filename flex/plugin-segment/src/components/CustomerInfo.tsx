@@ -14,8 +14,6 @@ import {
   MediaFigure,
   MediaObject,
   Stack,
-  Separator,
-  Badge,
   SkeletonLoader,
 } from "@twilio-paste/core";
 

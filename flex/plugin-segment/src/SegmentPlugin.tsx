@@ -26,15 +26,26 @@ export default class SegmentPlugin extends FlexPlugin {
       PasteThemeProvider: CustomizationProvider,
     });
 
-    flex.AgentDesktopView.defaultProps.splitterOptions = {
-      initialFirstPanelSize: "460px",
-      minimumFirstPanelSize: "460px",
-      minimumSecondPanelSize: "0px",
-    };
+    // When inside an iframe, ensure left panel is always shown
+    if (window.top != window.self) {
+      flex.AgentDesktopView.defaultProps.splitterOptions = {
+        initialFirstPanelSize: "460px",
+        minimumFirstPanelSize: "460px",
+        minimumSecondPanelSize: "0px",
+      };
+    } else {
+      flex.AgentDesktopView.defaultProps.splitterOptions = {
+        initialFirstPanelSize: "400px",
+      };
+    }
 
     const rightPanel = <Panel key="panel-replacement" />;
 
-    flex.AgentDesktopView.Panel2.Content.replace(rightPanel, { sortOrder: -1 });
+    flex.AgentDesktopView.Panel2.Content.replace(rightPanel, {
+      sortOrder: -1,
+    });
+
+    flex.RootContainer.Content.remove("project-switcher");
 
     flex.Actions.addListener(
       "beforeAcceptTask",

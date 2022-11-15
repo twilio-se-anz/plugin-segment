@@ -18,7 +18,7 @@ const Banner = () => {
             style={{ textAlign: "center" }}
           >
             <img
-              src={"https://conversations-3462-dev.twil.io/assets/logo.png"}
+              src={process.env.REACT_APP_LOGO_URL}
               style={{ width: "600px" }}
             />
           </Stack>
