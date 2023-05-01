@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Box,
   Text,
@@ -9,12 +9,12 @@ import {
   THead,
   Tr,
   Card,
+  Heading,
   Avatar,
   MediaBody,
   MediaFigure,
   MediaObject,
   Stack,
-  SkeletonLoader,
   Separator,
   Badge,
 } from "@twilio-paste/core";
@@ -24,66 +24,29 @@ import { BusinessIcon } from "@twilio-paste/icons/esm/BusinessIcon";
 import { CommunityIcon } from "@twilio-paste/icons/esm/CommunityIcon";
 import { StarIcon } from "@twilio-paste/icons/esm/StarIcon";
 
-import { getTraitsForUser } from "../services/segmentService";
-import { SegmentTraits } from "../types/SegmentTraits";
-import { withTaskContext } from "@twilio/flex-ui";
-
-type Props = {
-  task?: any;
-};
-
-const CustomerInfo = (props: Props) => {
-  const [traits, setTraits] = useState({} as SegmentTraits);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function getTraits() {
-      if (props.task?.attributes?.email) {
-        const traitsObj = await getTraitsForUser(props.task.attributes.email);
-        setTraits(traitsObj);
-      }
-      setLoading(false);
-    }
-    getTraits();
-  }, []);
-
-  if (loading)
-    return (
-      <Card>
-        <Stack orientation={"vertical"} spacing={"space70"}>
-          <SkeletonLoader />
-          <SkeletonLoader />
-          <SkeletonLoader />
-          <SkeletonLoader />
-          <SkeletonLoader />
-          <SkeletonLoader />
-        </Stack>
-      </Card>
-    );
-
+const FauxCustomerInfo = () => {
   return (
     <Card>
       <Stack orientation={"vertical"} spacing={"space40"}>
-        {traits && traits.first_name && traits.last_name && (
-          <MediaObject as="div" verticalAlign="center">
-            <MediaFigure as="div" spacing="space40">
-              <Avatar
-                size="sizeIcon90"
-                name={traits.first_name + " " + traits.last_name}
-              />
-            </MediaFigure>
-            <MediaBody as="div">
-              <Text
-                as="h2"
-                variant="heading50"
-                fontSize={"fontSize60"}
-                fontWeight="fontWeightBold"
-              >
-                {traits.first_name} {traits.last_name}
-              </Text>
-            </MediaBody>
-          </MediaObject>
-        )}
+        <MediaObject as="div" verticalAlign="center">
+          <MediaFigure as="div" spacing="space40">
+            <Avatar
+              size="sizeIcon90"
+              name="Alex Smith"
+              src="https://i.pravatar.cc/300"
+            />
+          </MediaFigure>
+          <MediaBody as="div">
+            <Text
+              as="h2"
+              variant="heading50"
+              fontSize={"fontSize60"}
+              fontWeight="fontWeightBold"
+            >
+              Alex Smith
+            </Text>
+          </MediaBody>
+        </MediaObject>
 
         <Table>
           <THead>
@@ -95,8 +58,8 @@ const CustomerInfo = (props: Props) => {
             <Tr>
               <Td>
                 <Text as="span" display={"flex"}>
-                  <StarIcon decorative={true} about="Age Group" />
-                  <Box marginLeft="space40">35-45</Box>
+                  <CommunityIcon decorative={true} about="Age Group" />
+                  <Box marginLeft="space40">65-75</Box>
                 </Text>
               </Td>
             </Tr>
@@ -104,7 +67,7 @@ const CustomerInfo = (props: Props) => {
             <Tr>
               <Td>
                 <Text as="span" display={"flex"}>
-                  <ThumbsUpIcon decorative={true} about="Location" />
+                  <BusinessIcon decorative={true} about="Location" />
                   <Box marginLeft="space40">Newtown</Box>
                 </Text>
               </Td>
@@ -113,7 +76,7 @@ const CustomerInfo = (props: Props) => {
             <Tr>
               <Td>
                 <Text as="span" display={"flex"}>
-                  <BusinessIcon decorative={true} about="Segment" />
+                  <StarIcon decorative={true} about="Segment" />
                   <Box marginLeft="space40">High Net Wealth</Box>
                 </Text>
               </Td>
@@ -122,7 +85,7 @@ const CustomerInfo = (props: Props) => {
             <Tr>
               <Td>
                 <Text as="span" display={"flex"}>
-                  <CommunityIcon decorative={true} about="Technology Profile" />
+                  <ThumbsUpIcon decorative={true} about="Technology Profile" />
                   <Box marginLeft="space40">Digital Native</Box>
                 </Text>
               </Td>
@@ -161,4 +124,4 @@ const CustomerInfo = (props: Props) => {
   );
 };
 
-export default withTaskContext(CustomerInfo);
+export default FauxCustomerInfo;

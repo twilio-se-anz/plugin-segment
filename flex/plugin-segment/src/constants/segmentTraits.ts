@@ -81,4 +81,23 @@ export const KnownTraits: KnownTrait[] = [
     display_value: true,
     variant: "new",
   },
+
+  {
+    key: "animal",
+    label: "Animal",
+    display_value: true,
+    variant: "new",
+  },
+  {
+    key: "favourite_colour",
+    label: "Colour",
+    display_value: true,
+    variant: "info",
+  },
+  {
+    key: "music_preference",
+    label: "Music",
+    display_value: true,
+    variant: "error",
+  },
 ];

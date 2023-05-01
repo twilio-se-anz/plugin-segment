@@ -5,6 +5,9 @@ import { CustomizationProvider } from "@twilio-paste/core/customization";
 import Panel from "./components/Panel";
 import { WorkerAcceptTaskActionPayload } from "@twilio/flex-ui/src/actions/WorkerActions";
 import { sendToSegment } from "./services/segmentService";
+import { ContentFragmentConditionFunction, ITask, Tab } from "@twilio/flex-ui";
+import AttachedData from "./views/AttachedData";
+import EventTimeline from "./components/EventTimeline";
 
 const PLUGIN_NAME = "SegmentPlugin";
 
@@ -39,10 +42,63 @@ export default class SegmentPlugin extends FlexPlugin {
       };
     }
 
+    /**********************
+     *  TAB Attached data
+     **********************/
+    const shouldDisplayAttachedDataTab: ContentFragmentConditionFunction =
+      (props: { task: any }) => {
+        const t = props.task;
+        if (t && t.attributes) return true;
+        return false;
+      };
+
+    flex.TaskCanvasTabs.Content.add(
+      <Tab
+        uniqueName="attached-data"
+        key="attached-data"
+        label="Interaction Data"
+      >
+        <AttachedData />
+      </Tab>,
+      {
+        sortOrder: 4,
+        if: shouldDisplayAttachedDataTab,
+      }
+    );
+
+    const shouldDisplayCDPTab: ContentFragmentConditionFunction = (props: {
+      task: any;
+    }) => {
+      const t = props.task;
+      if (t && t.attributes?.email) return true;
+      return false;
+    };
+
+    flex.TaskCanvasTabs.Content.add(
+      <Tab uniqueName="cdp-timeline" key="cdp-timeline" label="CDP">
+        <EventTimeline />
+      </Tab>,
+      {
+        sortOrder: 3,
+        if: shouldDisplayCDPTab,
+      }
+    );
+
+    /**********************
+     *  Show Panel 2
+     **********************/
+    const shouldDisplayFauxSegmentPanel: ContentFragmentConditionFunction = (
+      props: any
+    ) => {
+      const t = props.tasks.get(props.selectedTaskSid);
+      return (t && t.attributes?.faux) === "true" ? true : false;
+    };
+
     const rightPanel = <Panel key="panel-replacement" />;
 
     flex.AgentDesktopView.Panel2.Content.replace(rightPanel, {
       sortOrder: -1,
+      if: shouldDisplayFauxSegmentPanel,
     });
 
     flex.RootContainer.Content.remove("project-switcher");

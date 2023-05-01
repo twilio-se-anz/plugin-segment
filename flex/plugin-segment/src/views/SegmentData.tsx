@@ -22,7 +22,14 @@ const FauxService = () => {
       <Grid gutter="space30">
         <Column span={4}>
           <Stack orientation={"vertical"} spacing="space50">
-            <CustomerInfo />
+            {/* <CustomerInfo /> */}
+
+            <Card padding="space70">
+              <Heading as={"h2"} variant={"heading40"}>
+                CDP Traits
+              </Heading>
+              <TraitTags />
+            </Card>
 
             <Card padding="space70">
               <Heading as="h4" variant="heading40">
@@ -45,13 +52,6 @@ const FauxService = () => {
                 CDP Engagement Metrics
               </Heading>
               <EngagementMetrics />
-            </Card>
-
-            <Card padding="space70">
-              <Heading as={"h2"} variant={"heading40"}>
-                CDP Traits
-              </Heading>
-              <TraitTags />
             </Card>
 
             <Card padding="space70">

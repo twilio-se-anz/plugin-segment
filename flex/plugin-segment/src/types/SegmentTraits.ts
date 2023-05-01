@@ -51,4 +51,8 @@ export type SegmentTraits = {
   segment_id?: string;
   txn_flight_date?: null;
   txn_flight_ind?: null;
+
+  animal?: string;
+  music_preference?: string;
+  favourite_colour?: string;
 };

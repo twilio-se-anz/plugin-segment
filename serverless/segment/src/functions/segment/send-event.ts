@@ -18,6 +18,8 @@ type MyEvent = {
   FlowSid?: string;
   channelType?: string;
   direction?: string;
+  name?: string;
+  summary?: string;
 };
 
 export type SegmentContext = {
@@ -47,7 +49,12 @@ export const handler: ServerlessFunctionSignature = async function (
       "base64"
     );
 
+    console.log("Using token", token);
     console.log("Received event", event);
+
+    /**************************************** */
+    /* TRACK */
+    /**************************************** */
 
     let segmentEvent = {
       event: event.eventName || "Flex Event",
@@ -59,10 +66,10 @@ export const handler: ServerlessFunctionSignature = async function (
         FlowSid: event.FlowSid,
         channelType: event.channelType,
         direction: event.direction,
+        email: event.userId,
+        summary: event.summary,
       },
     };
-
-    console.log("Using token", token);
 
     var options: any = {
       method: "POST",
@@ -73,11 +80,8 @@ export const handler: ServerlessFunctionSignature = async function (
     };
 
     const url = `https://api.segment.io/v1/track`;
-
     const segmentResponse = await fetch(url, options);
-
     const responseData = await segmentResponse.json();
-
     response.setBody({ message: "accepted", ...responseData });
 
     callback(null, response);

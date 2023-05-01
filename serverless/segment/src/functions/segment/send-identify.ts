@@ -19,10 +19,21 @@ type MyEvent = {
   channelType?: string;
   direction?: string;
   name?: string;
+  phone?: string;
 };
 
 export type SegmentContext = {
   SEGMENT_WRITE_KEY?: string;
+};
+
+export type SegmentIdentifyData = {
+  type: string;
+  userId?: string;
+  traits: {
+    name?: string;
+    email?: string;
+    phone?: string;
+  };
 };
 
 export const handler: ServerlessFunctionSignature = async function (
@@ -55,14 +66,16 @@ export const handler: ServerlessFunctionSignature = async function (
     /* IDENTIFY */
     /**************************************** */
 
-    let identifyEvent = {
+    let identifyEvent: SegmentIdentifyData = {
       type: "identify",
       userId: event.userId,
       traits: {
-        name: event.name,
         email: event.userId,
       },
     };
+
+    if (event.name) identifyEvent.traits.name = event.name;
+    if (event.phone) identifyEvent.traits.phone = event.phone;
 
     var identifyRequestOptions: any = {
       method: "POST",
